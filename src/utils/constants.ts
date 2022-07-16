@@ -1,0 +1,2 @@
+export const MIN_SIGNUP_PASSWORD_LENGTH = 10;
+
