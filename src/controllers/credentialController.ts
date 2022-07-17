@@ -34,3 +34,16 @@ export async function getCredentialById(req: Request, res: Response) {
     console.log(logging.info('Credential retrieved successfully.'));
     res.status(200).send(credential);
 };
+
+export async function deleteCredential(req: Request, res: Response) {
+    const credentialId = Number(req.params.id);
+    if (isNaN(credentialId)) {
+        throw new AppError(422, "The id must be a number.");
+    };
+
+    const user = res.locals.user as User;
+
+    await credentialService.deleteCredentialById(credentialId, user.id);
+    console.log(logging.info('Credential deleted successfully.'));
+    res.sendStatus(200);
+};

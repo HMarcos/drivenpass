@@ -26,7 +26,7 @@ async function getAllUserCredentials(userId: number) {
 
 async function getCredentialById(credentialId: number, userId: number) {
     const credential = await findCredentialOrFail(credentialId);
-    checkIfCredentionBelongsToUser(credential, userId);
+    checkIfCredentialBelongsToUser(credential, userId);
 
     const decryptedPassword = encryptionUtils.decryptWithCryptr(credential.password);
     const formattedCredential: Credential = {
@@ -35,6 +35,13 @@ async function getCredentialById(credentialId: number, userId: number) {
     };
 
     return formattedCredential;
+};
+
+async function deleteCredentialById(credentialId: number, userId: number) {
+    const credential = await findCredentialOrFail(credentialId);
+    checkIfCredentialBelongsToUser(credential, userId);
+
+    await credentialRepository.deleteById(credentialId);
 };
 
 async function findCredentialOrFail(credentialId: number) {
@@ -46,7 +53,7 @@ async function findCredentialOrFail(credentialId: number) {
     return credential;
 };
 
-function checkIfCredentionBelongsToUser(credential: Credential, userId: number) {
+function checkIfCredentialBelongsToUser(credential: Credential, userId: number) {
     const credentialBelongsToTheUser = credential.userId === userId;
     if (!credentialBelongsToTheUser) {
         throw new AppError(403, "Credential does not belong to the user.");
@@ -66,6 +73,7 @@ const credentialService = {
     registerCredential,
     getAllUserCredentials,
     getCredentialById,
+    deleteCredentialById
 };
 
 export default credentialService;

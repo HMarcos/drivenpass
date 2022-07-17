@@ -43,11 +43,20 @@ async function insert(credentialCreationData: CredentialCreationData) {
     await prismaClient.credential.create({ data: credentialCreationData });
 };
 
+async function deleteById(credentialId: number) {
+    await prismaClient.credential.delete({
+        where: {
+            id: credentialId,
+        }
+    });   
+}
+
 const credentialRepository = {
     findByUserIdAndTitle,
     findAllUserCredetials,
     findById,
-    insert
+    insert,
+    deleteById
 };
 
 export default credentialRepository;
