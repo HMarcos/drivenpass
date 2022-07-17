@@ -19,12 +19,23 @@ async function findByUserIdAndTitle(userId: number, title: string) {
     return credential;
 };
 
+async function selectAllUserCredetials(userId: number) {
+    const credentials = await prismaClient.credential.findMany({
+        where: {
+            userId
+        }
+    });
+
+    return credentials;
+}
+
 async function insert(credentialCreationData: CredentialCreationData) {
     await prismaClient.credential.create({ data: credentialCreationData });
 };
 
 const credentialRepository = {
     findByUserIdAndTitle,
+    selectAllUserCredetials,
     insert
 };
 

@@ -12,4 +12,11 @@ export async function setCredential(req: Request, res: Response) {
 
     console.log(logging.info('Credential registered successfully.'));
     res.sendStatus(201);
-}
+};
+
+export async function getCredentials(req: Request, res: Response) {
+    const user = res.locals.user as User;
+    const userCredentials = await credentialService.getAllUserCredentials(user.id);
+    console.log(logging.info('Credentials retrieved successfully.'));
+    res.status(200).send(userCredentials);
+};

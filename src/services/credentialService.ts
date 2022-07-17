@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { Credential, User } from "@prisma/client";
 import credentialRepository, { RequestCredentialData, CredentialCreationData } from "../repositories/credentialRepository.js";
 import AppError from "../utils/appError.js";
 import encryptionUtils from "../utils/encryptionUtils.js";
@@ -19,8 +19,24 @@ async function registerCredential(credentialData: RequestCredentialData, user: U
     await credentialRepository.insert(credentialCreationData);
 };
 
+async function getAllUserCredentials(userId: number) {
+    const userCredentials = await credentialRepository.selectAllUserCredetials(userId);
+    const formattedUserCredentials = decryptCredentialPasswords(userCredentials);
+    return formattedUserCredentials;
+};
+
+function decryptCredentialPasswords(credentials: Credential[]) {
+    return credentials.map((credential) => {
+        return {
+            ...credential,
+            password: encryptionUtils.decryptWithCryptr(credential.password),
+        } as Credential;
+    });
+};
+
 const credentialService = {
-    registerCredential
+    registerCredential,
+    getAllUserCredentials
 };
 
 export default credentialService;

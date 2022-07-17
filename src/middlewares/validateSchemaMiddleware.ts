@@ -8,8 +8,8 @@ export default function validateSchema(schema: Schema) {
         const schemaValidation = schema.validate(body, { abortEarly: false });
         if (schemaValidation.error) {
             const validationErrors = schemaValidation.error.details.map(detail => detail.message);
-            const formatedValidationErrors = validationErrors.join('\n');
-            throw new AppError(422, formatedValidationErrors);
+            const formattedValidationErrors = validationErrors.join('\n');
+            throw new AppError(422, formattedValidationErrors);
         };
 
         next();
