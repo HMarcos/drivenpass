@@ -13,8 +13,17 @@ async function insert(sessionCreationData: SessionCreationData) {
     return sessionId;
 };
 
+async function findById(id: number) {
+    const session = await prismaClient.session.findUnique({
+        where: { id }
+    });
+
+    return session;
+}
+
 const sessionRepository = {
-    insert
+    insert,
+    findById
 };
 
 export default sessionRepository;

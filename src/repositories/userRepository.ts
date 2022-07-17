@@ -14,12 +14,24 @@ async function findByEmail(email: string) {
     return user;
 };
 
+async function findById(id: number) {
+    const user = await prismaClient.user.findUnique({
+        where: {
+            id
+        }
+    });
+
+
+    return user;
+};
+
 async function insert(user: UserCreationData) {
     await prismaClient.user.create({ data: user });
 };
 
 const userRepository = {
     findByEmail,
+    findById,
     insert
 };
 

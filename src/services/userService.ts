@@ -5,12 +5,18 @@ async function getByEmail(email: string) {
     return user;
 };
 
+async function getById(id: number) {
+    const user = await userRepository.findById(id);
+    return user;
+};
+
 async function register(user: UserCreationData) {
     await userRepository.insert(user);
 };
 
 const userService = {
     getByEmail,
+    getById,
     register
 };
 
