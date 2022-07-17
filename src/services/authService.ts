@@ -1,10 +1,8 @@
-import jwt from "jsonwebtoken";
-
 import { SessionCreationData } from "../repositories/sessionRepository.js";
 import { LoginData, UserCreationData } from "../repositories/userRepository.js";
 import AppError from "../utils/appError.js";
-import { JWT_SECRET_KEY } from "../utils/constants.js";
 import encryptionUtils from "../utils/encryptionUtils.js";
+import { generateToken } from "../utils/jwtUtils.js";
 import sessionService from "./sessionService.js";
 import userService from "./userService.js";
 
@@ -36,14 +34,6 @@ async function signIn(login: LoginData) {
 
     return token;
 
-};
-
-function generateToken(sessionId: number) {
-    const data = { sessionId };
-    const secret_key = JWT_SECRET_KEY;
-
-    const token = jwt.sign(data, secret_key);
-    return token;
 };
 
 const authService = {
