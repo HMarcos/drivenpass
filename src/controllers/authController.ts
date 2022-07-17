@@ -13,8 +13,8 @@ export async function signUp(req: Request, res: Response) {
 
 export async function signIn(req: Request, res: Response) {
     const login: LoginData = req.body;
-    await authService.signIn(login);
+    const token: string = await authService.signIn(login);
 
     console.log(logging.info('User logged successfully'));
-    res.sendStatus(200);
+    res.status(200).send({ token });
 };
