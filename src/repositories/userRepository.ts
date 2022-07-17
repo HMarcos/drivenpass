@@ -12,11 +12,11 @@ async function findByEmail(email: string) {
     });
 
     return user;
-}
+};
 
 async function insert(user: UserCreationData) {
     await prismaClient.user.create({ data: user });
-}
+};
 
 const userRepository = {
     findByEmail,

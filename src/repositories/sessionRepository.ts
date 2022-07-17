@@ -11,7 +11,7 @@ async function insert(sessionCreationData: SessionCreationData) {
     `;
     const sessionId: number = result[0].id;
     return sessionId;
-}
+};
 
 const sessionRepository = {
     insert

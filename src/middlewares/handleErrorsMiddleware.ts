@@ -7,7 +7,7 @@ export default function handleErros(error: Error, req: Request, res: Response, n
 
     if (error instanceof AppError) {
         return res.status(error.status).send(error.message);
-    }
+    };
 
     return res.status(500).send("Internal Server Error");
 };

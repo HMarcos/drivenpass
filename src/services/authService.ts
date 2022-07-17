@@ -36,7 +36,7 @@ async function signIn(login: LoginData) {
 
     return token;
 
-}
+};
 
 function generateToken(sessionId: number) {
     const data = { sessionId };
@@ -44,7 +44,7 @@ function generateToken(sessionId: number) {
 
     const token = jwt.sign(data, secret_key);
     return token;
-}
+};
 
 const authService = {
     signUp,

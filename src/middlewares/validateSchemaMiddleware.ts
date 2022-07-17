@@ -14,4 +14,4 @@ export default function validateSchema(schema: Schema) {
 
         next();
     }
-}
+};
