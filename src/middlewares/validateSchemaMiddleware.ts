@@ -10,8 +10,8 @@ export default function validateSchema(schema: Schema) {
             const validationErrors = schemaValidation.error.details.map(detail => detail.message);
             const formatedValidationErrors = validationErrors.join('\n');
             throw new AppError(422, formatedValidationErrors);
-        }
+        };
 
         next();
-    }
+    };
 };

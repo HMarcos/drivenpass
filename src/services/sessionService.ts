@@ -9,12 +9,12 @@ async function register(session: SessionCreationData) {
 
 function getSessionIdByToken(token: string) {
     return jwtUtils.getSesionIdByToken(token);
-}
+};
 
 async function getById(id: number) {
     const session = await sessionRepository.findById(id);
     return session;
-}
+};
 
 const sessionService = {
     register,

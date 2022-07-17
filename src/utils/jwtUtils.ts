@@ -19,5 +19,5 @@ export function getSesionIdByToken(token: string) {
     } catch (error) {
         console.log(logging.error(error));
         throw new AppError(401, "Invalid Token!");
-    }
+    };
 };

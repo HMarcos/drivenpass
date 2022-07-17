@@ -16,7 +16,7 @@ async function signUp(user: UserCreationData) {
     const newUser: UserCreationData = {
         ...user,
         password: encryptedPassword
-    }
+    };
 
     await userService.register(newUser);
 };
