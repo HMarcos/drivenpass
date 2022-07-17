@@ -14,5 +14,3 @@ export function getSesionIdByToken(token: string) {
     const data = jwt.verify(token, secret_key) as { sessionId: number };
     return data.sessionId;
 }
-
-console.log(getSesionIdByToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uSWQiOjksImlhdCI6MTY1ODAyMDk5N30.LQ56Hn2zvmmKlLH7uz_UxzWwp3IGMCmNy8KTqDylWCk"));
