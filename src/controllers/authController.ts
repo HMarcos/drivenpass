@@ -9,4 +9,12 @@ export async function signUp(req: Request, res: Response) {
 
     console.log(logging.info('User registered successfully'));
     res.sendStatus(201);
+};
+
+export async function signIn(req: Request, res: Response) {
+    
+    await authService.signIn();
+    
+    console.log(logging.info('User logged successfully'));
+    res.sendStatus(200);   
 }

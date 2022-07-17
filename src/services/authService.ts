@@ -19,8 +19,13 @@ async function signUp(user: UserCreationData) {
     await userService.register(newUser);
 };
 
+async function signIn(){
+    console.log('Sign In!')
+}
+
 const authService = {
-    signUp
+    signUp,
+    signIn
 };
 
 export default authService;
