@@ -2,7 +2,6 @@ import { Credential, User } from "@prisma/client";
 import credentialRepository, { RequestCredentialData, CredentialCreationData } from "../repositories/credentialRepository.js";
 import AppError from "../utils/appError.js";
 import encryptionUtils from "../utils/encryptionUtils.js";
-import logging from "../utils/logging.js";
 
 async function registerCredential(credentialData: RequestCredentialData, user: User) {
     const existingCredential = await credentialRepository.findByUserIdAndTitle(user.id, credentialData.title);
@@ -20,9 +19,38 @@ async function registerCredential(credentialData: RequestCredentialData, user: U
 };
 
 async function getAllUserCredentials(userId: number) {
-    const userCredentials = await credentialRepository.selectAllUserCredetials(userId);
+    const userCredentials = await credentialRepository.findAllUserCredetials(userId);
     const formattedUserCredentials = decryptCredentialPasswords(userCredentials);
     return formattedUserCredentials;
+};
+
+async function getCredentialById(credentialId: number, userId: number) {
+    const credential = await findCredentialOrFail(credentialId);
+    checkIfCredentionBelongsToUser(credential, userId);
+
+    const decryptedPassword = encryptionUtils.decryptWithCryptr(credential.password);
+    const formattedCredential: Credential = {
+        ...credential,
+        password: decryptedPassword,
+    };
+
+    return formattedCredential;
+};
+
+async function findCredentialOrFail(credentialId: number) {
+    const credential = await credentialRepository.findById(credentialId);
+    if (!credential) {
+        throw new AppError(404, "Credential not found.");
+    };
+
+    return credential;
+};
+
+function checkIfCredentionBelongsToUser(credential: Credential, userId: number) {
+    const credentialBelongsToTheUser = credential.userId === userId;
+    if (!credentialBelongsToTheUser) {
+        throw new AppError(403, "Credential does not belong to the user.");
+    };
 };
 
 function decryptCredentialPasswords(credentials: Credential[]) {
@@ -36,7 +64,8 @@ function decryptCredentialPasswords(credentials: Credential[]) {
 
 const credentialService = {
     registerCredential,
-    getAllUserCredentials
+    getAllUserCredentials,
+    getCredentialById,
 };
 
 export default credentialService;
