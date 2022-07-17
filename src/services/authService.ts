@@ -1,7 +1,6 @@
-import { UserCreationData } from "../repositories/userRepository.js";
+import { LoginData, UserCreationData } from "../repositories/userRepository.js";
 import AppError from "../utils/appError.js";
 import encryptionUtils from "../utils/encryptionUtils.js";
-import logging from "../utils/logging.js";
 import userService from "./userService.js";
 
 async function signUp(user: UserCreationData) {
@@ -19,8 +18,12 @@ async function signUp(user: UserCreationData) {
     await userService.register(newUser);
 };
 
-async function signIn(){
-    console.log('Sign In!')
+async function signIn(login: LoginData){
+    const user = await userService.getByEmail(login.email);
+    
+    if (!user || !encryptionUtils.validatePassword(login.password, user.password)){
+        throw new AppError(401, "Email or password is incorrect!");
+    };
 }
 
 const authService = {

@@ -6,8 +6,13 @@ function encryptWithBcrypt(data: string) {
     return encryptedData;
 }
 
+function validatePassword(password: string, encryptedPassword: string){
+    return bcrypt.compareSync(password, encryptedPassword);
+}
+
 const encryptionUtils = {
     encryptWithBcrypt,
+    validatePassword
 };
 
 export default encryptionUtils;
