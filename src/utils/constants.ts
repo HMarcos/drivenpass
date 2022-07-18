@@ -10,3 +10,4 @@ export const CRYPTR_SECRET_KEY = env.CRYPTR_SECRET_KEY || "MY_CRYPTR_SECRET_KEY"
 export const MAX_LENGTH_OF_SECURE_NOTE_TITLE = 50;
 export const MAX_LENGTH_OF_SECURE_NOTE = 1000;
 export const CARD_TYPES = ['credito', 'debito', 'ambos'];
+export const CARD_EXPIRATION_DATE_PATTERN = /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/;
