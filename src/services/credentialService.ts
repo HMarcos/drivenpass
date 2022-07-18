@@ -19,7 +19,7 @@ async function registerCredential(credentialData: RequestCredentialData, user: U
 };
 
 async function getAllUserCredentials(userId: number) {
-    const userCredentials = await credentialRepository.findAllUserCredetials(userId);
+    const userCredentials = await credentialRepository.findAllUserCredentials(userId);
     const formattedUserCredentials = decryptCredentialPasswords(userCredentials);
     return formattedUserCredentials;
 };

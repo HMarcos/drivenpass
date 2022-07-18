@@ -19,7 +19,7 @@ async function findByUserIdAndTitle(userId: number, title: string) {
     return credential;
 };
 
-async function findAllUserCredetials(userId: number) {
+async function findAllUserCredentials(userId: number) {
     const credentials = await prismaClient.credential.findMany({
         where: {
             userId
@@ -53,7 +53,7 @@ async function deleteById(credentialId: number) {
 
 const credentialRepository = {
     findByUserIdAndTitle,
-    findAllUserCredetials,
+    findAllUserCredentials,
     findById,
     insert,
     deleteById
