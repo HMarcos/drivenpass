@@ -6,10 +6,9 @@ import credentialSchema from "../schemas/credentialSchema.js";
 
 const credentialRouter = Router();
 
-credentialRouter.use(validateToken);
-credentialRouter.post("/credentials", validateSchema(credentialSchema), setCredential);
-credentialRouter.get("/credentials", getCredentials);
-credentialRouter.get("/credentials/:id", getCredentialById);
-credentialRouter.delete("/credentials/:id", deleteCredential);
+credentialRouter.post("/credentials", validateToken, validateSchema(credentialSchema), setCredential);
+credentialRouter.get("/credentials", validateToken, getCredentials);
+credentialRouter.get("/credentials/:id", validateToken, getCredentialById);
+credentialRouter.delete("/credentials/:id", validateToken, deleteCredential);
 
 export default credentialRouter;
