@@ -1,7 +1,7 @@
 # <p align = "center"> DrivenPass </p>
 
 <p align="center">
-   <img src="https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/1f512.svg"/>
+   <img style="width:300px;height:300px" src="https://notion-emojis.s3-us-west-2.amazonaws.com/prod/svg-twitter/1f512.svg"/>
 </p>
 
 <p align = "center">
@@ -237,7 +237,7 @@ Finalizado o processo, é só inicializar o servidor
 npm run dev
 ```
 
-## Teste scom o Thunder Cliente
+## Testes com o Thunder Cliente
 
 Para configurar os testes com o **Thunder Client** basta importar os arquivos: [thunder_client/thunder-collection_drivenpass.json](thunder_client/thunder-collection_drivenpass.json) (em *Collections*) e [thunder_client/thunder-environment_drivenpass.json](thunder_client/thunder-environment_drivenpass.json) (em *Env*);
 
