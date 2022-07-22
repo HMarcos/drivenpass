@@ -26,7 +26,7 @@ describe("Secure Notes test suite", () => {
     });
 
     it("get all secure notes for admin user", async () => {
-        let response = await supertest(app).get('/sign-in').send(admin_user);
+        let response = await supertest(app).post('/sign-in').send(admin_user);
         const token = response.body.token;
 
         let newSecureNote = secureNoteFactory.createSecureNoteInfo();
@@ -42,7 +42,7 @@ describe("Secure Notes test suite", () => {
     });
 
     it("get a secure note for admin user", async () => {
-        let response = await supertest(app).get('/sign-in').send(admin_user);
+        let response = await supertest(app).post('/sign-in').send(admin_user);
         const token = response.body.token;
 
         const newSecureNote = secureNoteFactory.createSecureNoteInfo();
@@ -60,7 +60,7 @@ describe("Secure Notes test suite", () => {
     });
 
     it("delete a secure note for admin user", async () => {
-        let response = await supertest(app).get('/sign-in').send(admin_user);
+        let response = await supertest(app).post('/sign-in').send(admin_user);
         const token = response.body.token;
 
         const newSecureNote = secureNoteFactory.createSecureNoteInfo();
@@ -78,7 +78,7 @@ describe("Secure Notes test suite", () => {
     });
 
     it("Get an invalid secure note, error 404", async () => {
-        let response = await supertest(app).get('/sign-in').send(admin_user);
+        let response = await supertest(app).post('/sign-in').send(admin_user);
         const token = response.body.token;
 
         response = await supertest(app).get(`/secure-notes/100`).set("Authorization", `Bearer ${token}`);
