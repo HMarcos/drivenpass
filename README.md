@@ -40,7 +40,7 @@ POST /sign-up
     - headers: {}
     - body: {
         "email": "email@gmail.com",
-        "senha": "senha"
+        "password": "senha"
     }
 ```
     
@@ -50,7 +50,7 @@ POST /sign-in
     - headers: {}
     - body: {
         "email": "email@gmail.com",
-        "senha": "senha"
+        "password": "senha"
     }
     - response: {
         token: "$token"
